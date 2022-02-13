@@ -1,0 +1,70 @@
+-- Note
+bin/rails seems to be the place where to call methods
+    generate
+
+------------------------
+-- Org Structure
+------------------------
+App     : has everything (MVC)
+Config  : Routes
+db      : Database
+
+request --> router --> controller-- > views
+"articles#index"  [Model & functionOfController]
+
+------------------------
+-- Actual Codes
+------------------------
+rails new blog
+rails new blog -d postgresql
+
+bin/rails server
+
+bin/rails generate controller Articles index --skip-routes
+
+-- Model generator
+bin/rails generate model Article title:string body:text
+bin/rails db:migrate
+
+bin/rails console
+article = Article.new(title: "Hello Rails", body: "I am on Rails!")
+article.save
+
+article 
+Article.find(1)
+
+
+-- Git Setup
+------------------------
+$ git config --list --show-origin
+
+$ git config --global user.name "John Doe"
+
+git remote add origin https://github.com/aungnlin/markupv1.git
+git branch -M main
+git push -u origin main
+
+
+rails new -d postgresql
+------------------------
+-- Notes
+------------------------
+Whenever we have such a combination of routes, controller actions, and views that work together to perform CRUD operations on an entity, we call that entity a resource.
+
+
+------------------------
+-- Postgresql Setup
+------------------------
+psql postgres
+CREATE ROLE markupv1 WITH LOGIN PASSWORD 'markupv1';
+ALTER ROLE markupv1 CREATEDB;
+rake db:setup
+bin/rails db:migrate
+
+------------------------
+-- Deployment
+------------------------
+git push heroku main
+heroku apps:rename unifi-markupv1
+https://unifi-markupv1.herokuapp.com/
+
